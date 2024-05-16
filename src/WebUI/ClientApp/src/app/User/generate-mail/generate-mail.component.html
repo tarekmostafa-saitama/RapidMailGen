@@ -1,0 +1,128 @@
+<div class="card h-100">
+
+    <div class="mailbox">
+
+        <div class="mailbox-toolbar">
+            <div class="mailbox-toolbar-item"><span class="mailbox-toolbar-text">Your Temp Mail is : <span class="text-primary">{{createMailBoxResponseModel?.result?.name+'@developermail.com'}}</span></span></div>
+         
+
+            <div class="mailbox-toolbar-item" (click)="getAllMessages()"><a role="button" class="mailbox-toolbar-link active">Refresh Mailbox</a>
+            </div>
+        </div>
+
+        <div class="mailbox-body">
+
+            <div class="mailbox-sidebar">
+                <div data-scrollbar="true" data-height="100%" class="ps ps--active-y" data-init="true"
+                    style="height: 100%;">
+                    <div class="mailbox-list">
+                         
+                        <div (click)="selectCurrentMail(mail.key)" *ngFor="let mail of getMailBoxMailsResponseModel?.parsedResult; let i=index" class="mailbox-list-item">
+                            <div class="mailbox-checkbox">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="mailCheckbox10">
+                                    <label class="form-check-label" for="mailCheckbox10"></label>
+                                </div>
+                            </div>
+                            <div class="mailbox-message">
+                                <a  class="mailbox-list-item-link">
+                                    <div class="mailbox-sender">
+                                        <span class="mailbox-sender-name">{{mail.value.fromName}}</span>
+                                        <span class="mailbox-time">{{mail.value.date}}</span>
+                                    </div>
+                                    <div class="mailbox-title">{{mail.value.fromAddress}}</div>
+                                    <div class="mailbox-desc">
+                                        {{mail.value.textBody.substring(0,50)}}
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                    </div>
+                    <div class="ps__rail-y" style="top: 0px; height: 585px; right: 0px;">
+                        <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 294px;"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mailbox-content d-none d-lg-block">
+                <div data-scrollbar="true" data-height="100%" data-skip-mobile="true" class="ps ps--active-x ps--active-y"
+                        data-init="true" style="height: 100%;" *ngIf="currentSelectedMail == null; else elseBlock">
+               
+                        <div class="mailbox-empty-message">
+                            <div class="mailbox-empty-message-icon"><i class="bi bi-inbox text-theme text-opacity-50"></i>
+                            </div>
+                            <div class="mailbox-empty-message-title">No message selected</div>
+                        </div>
+                        <div class="ps__rail-x" style="width: 873px; left: 0px; bottom: 0px;">
+                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 872px;"></div>
+                        </div>
+                        <div class="ps__rail-y" style="top: 0px; height: 585px; right: 0px;">
+                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 584px;"></div>
+                        </div>
+                    
+                </div>
+                <ng-template #elseBlock>
+
+                    <div data-scrollbar="true" data-height="100%" class="ps ps--active-x ps--active-y" data-init="true"
+                        style="height: 100%;">
+                    
+                        <div class="mailbox-detail">
+                    
+                            <div class="mailbox-detail-header">
+                                <div class="d-flex">
+                   
+                                    <div class="flex-fill ms-3">
+                                        <div class="d-lg-flex align-items-center">
+                                            <div class="flex-1">
+                                                <div class="fw-600">{{currentSelectedMail.fromName}} &lt;{{currentSelectedMail.fromAddress}}&gt;</div>
+                                                <div class="fs-13px">
+                                                    <span class="me-1">to</span> <a 
+                                                        class="text-decoration-none">{{currentSelectedMail.toAddress}}</a>
+                                                </div>
+                                            </div>
+                                            <div class="fs-12px text-white text-opacity-50 text-lg-end mt-lg-0 mt-3">{{currentSelectedMail.date}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                    
+                            <div class="mailbox-detail-content">
+                                <h4 class="mb-3">Subject : {{currentSelectedMail.subject}}</h4>
+                    
+                        
+                       
+                    
+                    
+                                <div [innerHTML]="currentSelectedMail.htmlBody" class="mailbox-detail-body">
+                               
+                                </div>
+                    
+                            </div>
+                    
+                        </div>
+                    
+                        <div class="ps__rail-x" style="width: 873px; left: 0px; bottom: 0px;">
+                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 872px;"></div>
+                        </div>
+                        <div class="ps__rail-y" style="top: 0px; height: 585px; right: 0px;">
+                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 463px;"></div>
+                        </div>
+                    </div>
+
+                </ng-template>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+  
+
+</div>
